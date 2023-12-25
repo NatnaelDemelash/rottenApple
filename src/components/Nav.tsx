@@ -15,19 +15,19 @@ const Nav = () => {
       <HStack>
         <Stack direction="row" spacing={10} marginX={16}>
           <Link to="/">
-            <Text color="#DD6B20" fontSize={17} fontWeight={600}>
+            <Text color="#ffc078" fontSize={17} fontWeight={600}>
               Home
             </Text>
           </Link>
 
           <Link to="/rated">
-            <Text color="#DD6B20" fontSize={17} fontWeight={600}>
+            <Text color="#ffc078" fontSize={17} fontWeight={600}>
               Rated
             </Text>
           </Link>
 
           <Link to="/auth">
-            <Text color="#DD6B20" fontSize={17} fontWeight={600}>
+            <Text color="#ffc078" fontSize={17} fontWeight={600}>
               Auth
             </Text>
           </Link>
