@@ -9,7 +9,9 @@ const Nav = () => {
     <HStack justifyContent="space-between" paddingY={5} paddingX={10}>
       <HStack>
         <Image src={logo} boxSize="40px" />
-        <Text fontSize="25px">rotten-Apple</Text>
+        <Text fontSize={25}>
+          <Link to="/">RottenApple</Link>
+        </Text>
       </HStack>
 
       <HStack>
