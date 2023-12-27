@@ -6,10 +6,13 @@ import {
   HStack,
   Heading,
   Image,
+  SimpleGrid,
   Stack,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
 import { DisplayType } from ".";
+import { Link } from "react-router-dom";
 
 interface DisplayData {
   id: number;
@@ -28,40 +31,49 @@ interface Props {
 }
 
 const ColumnDisplay = ({ data, displayType }: Props) => {
-  return (
-    <Grid templateColumns="repeat(3, 1fr)" gap={8}>
-      {data.map((displayData: DisplayData) => (
-        <GridItem>
-          <Card maxW="sm" boxShadow="xl">
-            <CardBody>
-              <Image
-                src={`https://image.tmdb.org/t/p/original/${displayData.poster_path}`}
-                fit="cover"
-              />
+  const { colorMode } = useColorMode();
+  const cardColor = colorMode === "light" ? "#f1f3f5" : "";
 
-              <Stack mt="6" spacing="3">
-                <Heading size="md">
-                  {displayType === DisplayType.Movies
-                    ? displayData.title
-                    : displayData.name}
-                </Heading>
-                <Text>{displayData.overview}</Text>
-                <HStack justifyContent="space-between">
-                  <Text>
+  return (
+    <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 4 }} gap={8}>
+      {data.map((displayData: DisplayData) => (
+        <GridItem key={displayData.id}>
+          <Link
+            to={`/${displayType === DisplayType.TVShows ? "tvshow" : "movie"}/${
+              displayData.id
+            }`}
+          >
+            <Card maxW="sm" boxShadow="xl" background={cardColor}>
+              <CardBody>
+                <Image
+                  src={`https://image.tmdb.org/t/p/original/${displayData.poster_path}`}
+                  fit="cover"
+                />
+
+                <Stack mt="6" spacing="3">
+                  <Heading size="md">
                     {displayType === DisplayType.Movies
-                      ? displayData.release_date
-                      : displayData.first_air_date}
-                  </Text>
-                  <Text color="#ffc078" fontWeight={600}>
-                    {displayData.vote_average}
-                  </Text>
-                </HStack>
-              </Stack>
-            </CardBody>
-          </Card>
+                      ? displayData.title
+                      : displayData.name}
+                  </Heading>
+                  <Text>{displayData.overview.slice(0, 300) + "..."}</Text>
+                  <HStack justifyContent="space-between" alignItems="center">
+                    <Text fontWeight={600} fontStyle="italic">
+                      {displayType === DisplayType.Movies
+                        ? `RelaseDate :  ${displayData.release_date}`
+                        : `First_air_day :  ${displayData.first_air_date}`}
+                    </Text>
+                    <Text color="#ffc078" fontWeight={600}>
+                      {displayData.vote_average}
+                    </Text>
+                  </HStack>
+                </Stack>
+              </CardBody>
+            </Card>
+          </Link>
         </GridItem>
       ))}
-    </Grid>
+    </SimpleGrid>
   );
 };
 

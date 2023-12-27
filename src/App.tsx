@@ -2,6 +2,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav";
 import Auth from "./pages/auth";
 import HomePage from "./pages/home";
+import Movie from "./pages/movie";
+import TVShow from "./pages/tvshow";
+import NotFound from "./pages/404";
 
 const App = () => {
   return (
@@ -12,6 +15,9 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/rated" element={<h1>Rated Pages</h1>} />
+          <Route path="/movie/:id" element={<Movie />} />
+          <Route path="/tvshow/:id" element={<TVShow />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </div>
