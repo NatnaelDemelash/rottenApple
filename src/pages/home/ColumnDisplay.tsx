@@ -64,7 +64,7 @@ const ColumnDisplay = ({ data, displayType }: Props) => {
                         : `First_air_day :  ${displayData.first_air_date}`}
                     </Text>
                     <Text color="#ffc078" fontWeight={600}>
-                      {displayData.vote_average}
+                      {displayData.vote_average.toFixed(1)}
                     </Text>
                   </HStack>
                 </Stack>
