@@ -23,8 +23,8 @@ const Auth = () => {
         maxW="md"
         h="200px"
         boxShadow="lg"
-        background="#e6fcf5"
-        color="#000"
+        background="#748ffc"
+        color="white"
       >
         <CardBody>
           <Text fontSize={26} fontWeight={500} textAlign="center">
