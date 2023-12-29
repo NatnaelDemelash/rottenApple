@@ -1,11 +1,19 @@
 import {
+  Button,
   Card,
   CardBody,
+  FormControl,
+  FormLabel,
   Grid,
   GridItem,
   HStack,
   Heading,
   Image,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
   SimpleGrid,
   Stack,
   Text,
@@ -71,6 +79,22 @@ const ColumnDisplay = ({ data, displayType }: Props) => {
               </CardBody>
             </Card>
           </Link>
+
+          <HStack justifyContent="space-evenly" alignItems="center" mt={4}>
+            <FormControl ml={5}>
+              <NumberInput min={0} max={10} width="150px">
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+            </FormControl>
+
+            <Button width="200px" background="#0b7285" color="#fff">
+              Rate
+            </Button>
+          </HStack>
         </GridItem>
       ))}
     </SimpleGrid>
