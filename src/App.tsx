@@ -5,6 +5,7 @@ import HomePage from "./pages/home";
 import Movie from "./pages/movie";
 import TVShow from "./pages/tvshow";
 import NotFound from "./pages/404";
+import Rated from "./pages/rated";
 
 const App = () => {
   return (
@@ -14,7 +15,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/auth" element={<Auth />} />
-          <Route path="/rated" element={<h1>Rated Pages</h1>} />
+          <Route path="/rated" element={<Rated />} />
           <Route path="/movie/:id" element={<Movie />} />
           <Route path="/tvshow/:id" element={<TVShow />} />
           <Route path="*" element={<NotFound />} />
