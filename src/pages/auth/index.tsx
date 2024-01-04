@@ -13,8 +13,8 @@ const Auth = () => {
 
   const handleLogin = async () => {
     await mutate();
-    localStorage.setItem("guest_session_id", data?.guest_session_id);
-    navigate("/home");
+    localStorage.setItem("guest_session_id", data.guest_session_id);
+    navigate("/");
   };
 
   return (

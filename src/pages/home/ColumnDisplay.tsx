@@ -21,6 +21,11 @@ import {
 } from "@chakra-ui/react";
 import { DisplayType } from ".";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { rateMovie, rateTVShow } from "./mutaion";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface DisplayData {
   id: number;
@@ -41,6 +46,33 @@ interface Props {
 const ColumnDisplay = ({ data, displayType }: Props) => {
   const { colorMode } = useColorMode();
   const cardColor = colorMode === "light" ? "#f1f3f5" : "";
+
+  const [rating, setRating] = useState(0);
+
+  const onSuccess = () => {
+    toast.success("Successfully Rated!");
+  };
+
+  const onError = () => {
+    toast.error("Something went wrong");
+  };
+
+  const { mutate: rateMovieMutaion } = useMutation({
+    mutationKey: ["moveRate"],
+    mutationFn: (id: number) => rateMovie(id, rating),
+    onSuccess: onSuccess,
+    onError: onError,
+  });
+
+  const { mutate: rateTvShowMutation } = useMutation({
+    mutationKey: ["tvShowRate"],
+    mutationFn: (id: number) => rateTVShow(id, rating),
+    onSuccess: onSuccess,
+    onError: onError,
+  });
+
+  const rate =
+    displayType === DisplayType.Movies ? rateMovieMutaion : rateTvShowMutation;
 
   return (
     <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 4 }} gap={8}>
@@ -83,7 +115,9 @@ const ColumnDisplay = ({ data, displayType }: Props) => {
           <HStack justifyContent="space-evenly" alignItems="center" mt={4}>
             <FormControl ml={5}>
               <NumberInput min={0} max={10} width="150px">
-                <NumberInputField />
+                <NumberInputField
+                  onChange={(e) => setRating(Number(e.target.value))}
+                />
                 <NumberInputStepper>
                   <NumberIncrementStepper />
                   <NumberDecrementStepper />
@@ -91,7 +125,12 @@ const ColumnDisplay = ({ data, displayType }: Props) => {
               </NumberInput>
             </FormControl>
 
-            <Button width="200px" background="#0b7285" color="#fff">
+            <Button
+              width="200px"
+              background="#0b7285"
+              color="#fff"
+              onClick={() => rate(displayData.id)}
+            >
               Rate
             </Button>
           </HStack>
